@@ -3,7 +3,12 @@ const { Pizza } = require('../models');
 const pizzaController = {
     // get all pizzas
     getAllPizza(req, res) {
-        Pizza.find({})
+        Pizza.find({
+            path: 'comments',
+            select: '-__v'
+        })
+        .select('-__v')
+        .sort({ __id: -1 })
         .then(dbPizzaData => res.json(dbPizzaData))
         .catch(err => {
             console.log(err);
@@ -15,6 +20,11 @@ const pizzaController = {
 
     getPizzaById({ params }, res) {
         Pizza.findOne({ _id: params.id })
+        .populate({
+            path: 'comments',
+            select: '-__v'
+        })
+            .select('-__v')
             .then(dbPizzaData => {
                 // If no pizza is found, send 404
                 if (!dbPizzaData) {
