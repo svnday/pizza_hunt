@@ -11,6 +11,7 @@ app.use(express.static('public'));
 app.use(require('./routes'));
 
 mongoose.connect(process.envMONGODB_URI || 'mongodb://localhost:27017/pizza-hunt', {
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
