@@ -55,7 +55,7 @@ function uploadPizza() {
     getAll.onsuccess = function() {
         // if there was no data, let's send it to api server
         if (getAll.result.length > 0) {
-            getch('/api/pizzas', {
+            fetch('/api/pizzas', {
                 method: 'POST',
                 body: JSON.stringify(getAll.result),
                 headers: {
